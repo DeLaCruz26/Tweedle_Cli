@@ -1,0 +1,11 @@
+1. Welcome the user, introduce the app, ask what would they like to to know about?
+2. Provide list of products to user, prompt them to make a selection 
+    1.
+    2.
+    3.
+    4.
+    5.
+    ...
+3. Produces results based on the selection they made to provide more details. Also show option to go back to the menu ("BACK")
+4. Reproduce the menu if user typed ("BACK") or exit if user types ("EXIT")
+5. Say goodbye if exit
