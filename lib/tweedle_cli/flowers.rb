@@ -1,14 +1,13 @@
 class TweedleCli::Flowers
 
-    attr_accessor :name, :hemp_flower, :description
+    attr_accessor :name, :hemp, :description
 
     @@all = []
 
-    def initialize(name)
+    def initialize(name, hemp)
         @name = name
-        @hemp_flower = @hemp_flower
-        @description = description
-        add_hemp
+        @hemp = hemp
+        add_to_hemp
         save
     end
 
@@ -20,8 +19,8 @@ class TweedleCli::Flowers
         @@all
     end
 
-    def add_hemp
-        @hemp_flower.flowers << self unless @hemp_flower.flowers.includes?(self)
+    def add_to_hemp
+        @hemp.flowers << self unless @hemp.flowers.include?(self)
     end
 
 end
