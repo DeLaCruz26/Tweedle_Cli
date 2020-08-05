@@ -42,6 +42,24 @@ class TweedleCli::CLI
             puts product.name
             puts product.price
         end
+        menu_selection
+    end
+
+    def menu_selection
+        puts ""
+        puts "Type 'back' if you would like to select another option to shop."
+        puts "Otherwise type 'exit' to check out."
+
+        input = gets.strip.downcase
+        if input == "back"
+            list_options
+            show_option_products(option)
+        elsif input == "exit"
+            puts "See ya next time!"
+        else
+            puts "Sorry didn't understand.."
+            menu_selection
+        end
     end
 
         
