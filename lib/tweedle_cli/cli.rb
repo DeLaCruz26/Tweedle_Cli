@@ -4,12 +4,39 @@ class TweedleCli::CLI
         puts "\nWelcome to Tweedle!\n".colorize(:green)
         puts "Choose an option to shop now!"
         scrape_options
+        list_options
+        user_inputs
     end
 
     def scrape_options
         url = "https://tweedlefarms.com/flower/"
-        options = TweedleCli::Scraper.scrape_options(url)
+        TweedleCli::Scraper.scrape_options(url)
     end
+
+    def list_options
+        options = TweedleCli::Option.all
+        options.each.with_index(1) do |option, index|
+            puts "#{index}. #{option.name}"
+        end
+    end
+
+    def user_input
+        input = gets.strip.to_i
+        max = TweedleCli::Option.all.length
+        if input.betweeen?(1, max)
+            option = TweedleCli::Option.all[input - 1]
+            show_option_items(input)
+        else
+            puts "Invalid number, please try again."
+            user_input
+        end
+    end
+
+    def show_option_items(option)
+        
+    end
+
+
         
 
 end

@@ -2,16 +2,12 @@ class TweedleCli::Scraper
 
     def self.scrape_options(url)
        site = Nokogiri::HTML(open(url))
-       category = site.css("div.sidebarBlock")
-       links = category.css("li.true.navList-item.category-item.ss a.navList-action")
+       categories = site.css("ul.navList li.navList-item.category-item.ss a.navList-action")
+       
 
-       links.map do |link|
-        binding.pry
+       categories.map do |link|
         TweedleCli::Option.new(link.text, link.attributes["href"].value)
        end
-
-
-
     end
 
         #def self.scrape_flowers(hemp)
