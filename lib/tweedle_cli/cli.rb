@@ -2,10 +2,12 @@ class TweedleCli::CLI
 
     def call
         puts "\nWelcome to Tweedle!\n".colorize(:green)
-        puts "Choose an option to shop now!"
+        puts "Select a number to shop now!"
+        puts ""
         scrape_options
         list_options
-        user_inputs
+        user_input
+        show_option_products
     end
 
     def scrape_options
@@ -23,19 +25,24 @@ class TweedleCli::CLI
     def user_input
         input = gets.strip.to_i
         max = TweedleCli::Option.all.length
-        if input.betweeen?(1, max)
+        if input.between?(1, max)
             option = TweedleCli::Option.all[input - 1]
-            show_option_items(input)
+            show_option_products(option)
         else
-            puts "Invalid number, please try again."
+            puts "\nInvalid number, please try again."
             user_input
         end
     end
 
-    def show_option_items(option)
-        
+    def show_option_products(option)
+        TweedleCli::Scraper.scrape_products(option)
+        puts "Here are the products for #{option.name}:"
+        option.products.each do |product|
+            puts ""
+            puts product.name
+            puts product.price
+        end
     end
-
 
         
 

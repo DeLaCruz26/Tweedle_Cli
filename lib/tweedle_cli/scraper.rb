@@ -10,19 +10,18 @@ class TweedleCli::Scraper
        end
     end
 
-        #def self.scrape_flowers(hemp)
-            
-           # site = "https://tweedlefarms.com/hemp-flower/"
+    def self.scrape_products(option)
+        site = Nokogiri::HTML(open(option.url))
+        products = site.css("li.product article.card")
 
-            #doc = Nokogiri::HTML(open(site))
-#  hemp_flowers = doc.css("ul.productGrid li h4.card-title")
+        products.each do |block|
+            product = TweedleCli::Product.new
 
-            #hemp_flowers.each do |hemp|
-             #   name = hemp.text.strip
-            #    TweedleCli::Flowers.new(name, hemp)
-           # end
-        #end
-      
-    #end
+            product.name = block.css("h4.card-title a").text
+            product.price = block.css("span.price.price--withoutTax").text
+           
+            option.add_product(product)
+        end
+    end
 
 end
