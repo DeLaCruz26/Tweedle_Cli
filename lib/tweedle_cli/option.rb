@@ -28,7 +28,5 @@ class TweedleCli::Option
             @products << product
             product.option = self
         end
-            
-
-
+        
 end

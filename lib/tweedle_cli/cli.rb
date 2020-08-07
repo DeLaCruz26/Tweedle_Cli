@@ -7,7 +7,7 @@ class TweedleCli::CLI
         scrape_options
         list_options
         user_input
-        show_option_products
+        show_option_products(option)
     end
 
     def scrape_options
@@ -29,18 +29,20 @@ class TweedleCli::CLI
             option = TweedleCli::Option.all[input - 1]
             show_option_products(option)
         else
-            puts "\nInvalid number, please try again."
+            puts "\nInvalid number, please try again.".colorize(:red)
             user_input
         end
     end
 
     def show_option_products(option)
-        TweedleCli::Scraper.scrape_products(option)
-        puts "Here are the products for #{option.name}:"
+        if option.products == []
+            TweedleCli::Scraper.scrape_products(option)
+        end
+        puts "Here are the products for #{option.name.colorize(:green)}:"
         option.products.each do |product|
             puts ""
-            puts product.name
-            puts product.price
+            puts product.name.colorize(:yellow)
+            puts product.price.colorize(:yellow)
         end
         menu_selection
     end
@@ -53,70 +55,14 @@ class TweedleCli::CLI
         input = gets.strip.downcase
         if input == "back"
             list_options
+            user_input
             show_option_products(option)
         elsif input == "exit"
-            puts "See ya next time!"
+            puts "See ya next time!".colorize(:green)
         else
-            puts "Sorry didn't understand.."
+            puts "Sorry didn't understand..".colorize(:red)
             menu_selection
         end
     end
 
-        
-
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#def list_options
-    #puts "\nChoose an option to see flowers.\n"
-   # puts ""
-    #@options.each.with_index(1) do |option, index| 
-    #    puts "#{index}. #{option.name}"
-   # end
-#end
-
-#def get_options
- #   @options = TweedleCli::HempFlower.all 
-#end
-
-#def get_user_option#
-  #  user_option = gets.strip.to_i
-  #  
-  #  if valid(user_option, @options)
-   #     show_flowers(user_option)
-  #  end
-#end
-
-#def valid(input, options)
-#    input <= options.length && input > 0
-#end
-
-#def show_flowers(user_option)#
- #   option = @options[user_option - 1]
-  #  option.get_flowers
- #   puts "Here are #{option.name}."
-  #  option.flowers.each.with_index(1) do |flower, index|
-  #      puts "#{index}. #{flower.name}"
-  #  end
-#end 
