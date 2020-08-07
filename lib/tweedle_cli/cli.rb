@@ -17,7 +17,7 @@ class TweedleCli::CLI
     def list_options
         options = TweedleCli::Option.all
         options.each.with_index(1) do |option, index|
-            puts "#{index}. #{option.name}"
+            puts "#{index}. #{option.name.colorize(:light_blue)}"
         end
     end
 
