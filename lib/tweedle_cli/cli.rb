@@ -7,7 +7,6 @@ class TweedleCli::CLI
         scrape_options
         list_options
         user_input
-        show_option_products(option)
     end
 
     def scrape_options
@@ -56,7 +55,6 @@ class TweedleCli::CLI
         if input == "back"
             list_options
             user_input
-            show_option_products(option)
         elsif input == "exit"
             puts "See ya next time!".colorize(:green)
         else

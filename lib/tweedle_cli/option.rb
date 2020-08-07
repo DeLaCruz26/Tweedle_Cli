@@ -1,6 +1,6 @@
 class TweedleCli::Option
 
-        attr_accessor :name, :url
+        attr_accessor :name, :url, :option
         attr_reader :products
 
         @@all = []
@@ -26,7 +26,6 @@ class TweedleCli::Option
 
         def add_product(product)
             @products << product
-            product.option = self
         end
         
 end
